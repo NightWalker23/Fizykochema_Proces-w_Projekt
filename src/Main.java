@@ -7,10 +7,16 @@ public class Main {
 		model.interpolateData();
 		model.calculateEnthalpy();
 
-		System.out.println();
-		double[] enthalpy = model.getEnthalpy();
-		for (double anEnthalpy : enthalpy) {
-			System.out.println(anEnthalpy);
-		}
+		//TODO:
+		//liczba przemian
+//		for (Element el : model.getListOfElements()){
+//			System.out.println("T =\t" + el.getTemperature());
+//			System.out.println("CP =\t" + el.getSpecificHeat() + "\n");
+//		}
+
+//		double[] enthalpy = model.getEnthalpy();
+//		for (double anEnthalpy : enthalpy) {
+//			System.out.println(anEnthalpy);
+//		}
 	}
 }
