@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Data {
 
-	public List<Element> getListFromFile(String path) {
+	public List<Element> getListFromFile(String path) throws Exception {
 		List<Element> listOfElements = new ArrayList<>();
 		try (Scanner scanner = new Scanner(new File(path))) {
 			while (scanner.hasNext()) {
@@ -17,7 +17,7 @@ public class Data {
 				);
 			}
 		} catch (Exception o) {
-			System.out.println("Cannot read file");
+			throw new Exception();
 		}
 
 		return listOfElements;

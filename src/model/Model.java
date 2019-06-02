@@ -8,14 +8,6 @@ import static model.EffectType.*;
 public class Model {
 	private List<Element> listOfElements = new ArrayList<>();
 	private double[] enthalpy;
-	private List<HeatEffect> heatEffectList = new ArrayList<>() {
-		{
-			add(new HeatEffect(800, 1200, 250, OURS));
-			add(new HeatEffect(800, 1200, 250, AVERAGE));
-//			add(new HeatEffect(800, 1200, 250, LINEAR));
-//			add(new HeatEffect(1000, 1100, 100, OURS));
-		}
-	};
 
 	public List<Element> getListOfElements() {
 		return listOfElements;
@@ -23,14 +15,6 @@ public class Model {
 
 	public void setListOfElements(List<Element> listOfElements) {
 		this.listOfElements = listOfElements;
-	}
-
-	public List<HeatEffect> getHeatEffectList() {
-		return heatEffectList;
-	}
-
-	public void setHeatEffectList(List<HeatEffect> heatEffectList) {
-		this.heatEffectList = heatEffectList;
 	}
 
 	public double[] getEnthalpy() {
@@ -57,7 +41,7 @@ public class Model {
 		}
 	}
 
-	public void assignHeatEffectToTheElements(){
+	public void assignHeatEffectToTheElements(List<HeatEffect> heatEffectList){
 		for (HeatEffect heatEl: heatEffectList) {
 			for (Element el : listOfElements){
 				if (el.getTemperature() >= heatEl.getTempS() && el.getTemperature() <= heatEl.getTempE()){

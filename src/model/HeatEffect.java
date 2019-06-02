@@ -1,15 +1,31 @@
 package model;
 
 public class HeatEffect {
-	private double tempS;
-	private double tempE;
-	private double heatEffect;
-	private EffectType effectType;
+	public double tempS;
+	public double tempE;
+	public double heatEffect;
+	public EffectType effectType;
 
 	public HeatEffect(double tempS, double tempE, double heatEffect, EffectType effectType) {
 		this.tempS = tempS;
 		this.tempE = tempE;
 		this.heatEffect = heatEffect;
+		this.effectType = effectType;
+	}
+
+	public void setTempS(double tempS) {
+		this.tempS = tempS;
+	}
+
+	public void setTempE(double tempE) {
+		this.tempE = tempE;
+	}
+
+	public void setHeatEffect(double heatEffect) {
+		this.heatEffect = heatEffect;
+	}
+
+	public void setEffectType(EffectType effectType) {
 		this.effectType = effectType;
 	}
 
@@ -77,47 +93,4 @@ public class HeatEffect {
 		}
 		return sum;
 	}
-
-//	public static void main(String[] args) {
-//		HeatEffect h1 = new HeatEffect(1500, 1510, 500, EffectType.AVERAGE);
-//
-//		double fraction;
-//		double sum = 0.0;
-
-//		System.out.println("AVERAGE");
-//		for (int i = (int)h1.tempS; i < h1.tempE; i++){
-//			fraction = h1.method_AVERAGE(i);
-//			sum += fraction;
-//
-//			System.out.println(fraction);
-//		}
-//		System.out.println("SUM = " + sum);
-//
-//
-//		System.out.println();
-//		sum = 0.0;
-//
-//		System.out.println("LINEAR");
-//		for (int i = (int)h1.tempS; i < h1.tempE; i++){
-//			fraction = h1.method_LINEAR(i);
-//			sum += fraction;
-//
-//
-//			System.out.println(fraction);
-//		}
-//		System.out.println("SUM = " + sum);
-//
-//
-//		System.out.println();
-//		sum = 0.0;
-//
-//		System.out.println("OURS");
-//		for (int i = (int)h1.tempS; i < h1.tempE; i++){
-//			fraction = h1.method_OURS(i);
-//			sum += fraction;
-//
-//			System.out.println(fraction);
-//		}
-//		System.out.println("SUM = " + sum);
-//	}
 }

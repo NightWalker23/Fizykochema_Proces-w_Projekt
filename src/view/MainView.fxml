@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="1011.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <Button fx:id="loadDataBtn" layoutX="456.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadDataFromFile" prefHeight="33.0" prefWidth="132.0" text="Wczytaj dane" />
+      <LineChart fx:id="lineChart" alternativeColumnFillVisible="true" alternativeRowFillVisible="false" animated="false" createSymbols="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="15.0" layoutY="218.0" prefHeight="688.0" prefWidth="1166.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+        <xAxis>
+          <CategoryAxis animated="false" label="Temperatura [st. C]" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis animated="false" label="Entalpia [J]" minorTickVisible="false" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Pane fx:id="calculationPane" disable="true" layoutX="598.0" layoutY="15.0" prefHeight="170.0" prefWidth="699.0">
+         <children>
+            <TextField fx:id="tkTextField" layoutX="5.0" layoutY="35.0" prefHeight="25.0" prefWidth="132.0" />
+            <Button layoutX="175.0" layoutY="57.0" mnemonicParsing="false" onAction="#saveEntalpyFile" prefHeight="33.0" prefWidth="142.0" text="Zapisz wynik do pliku" />
+            <Button layoutX="656.0" mnemonicParsing="false" onAction="#deleteItem" text="Usuń" />
+            <Button layoutX="175.0" layoutY="-2.0" mnemonicParsing="false" onAction="#showEntalpyWithEffect" prefHeight="33.0" prefWidth="142.0" text="Przelicz i pokaż wykres" />
+            <Button layoutX="592.0" mnemonicParsing="false" onAction="#addItem" text="Dodaj" />
+            <TextField fx:id="heatEffectTextField" layoutX="5.0" layoutY="68.0" prefHeight="25.0" prefWidth="132.0" />
+            <Button layoutX="350.0" layoutY="57.0" mnemonicParsing="false" onAction="#cleanLineChart" prefHeight="33.0" prefWidth="132.0" text="Wyczysc wykres" />
+            <TextField fx:id="tpTextField" layoutX="5.0" prefHeight="25.0" prefWidth="132.0" />
+            <Button layoutX="175.0" layoutY="97.0" mnemonicParsing="false" onAction="#saveEntalpyLineChart" prefHeight="33.0" prefWidth="142.0" text="Zapisz wykres" />
+            <ChoiceBox fx:id="methodChoiceBox" layoutX="5.0" layoutY="100.0" prefHeight="25.0" prefWidth="132.0" />
+            <Button layoutY="130.0" mnemonicParsing="false" onAction="#editItem" text="Edit" />
+         </children>
+      </Pane>
+      <TableView fx:id="tableView" onMouseClicked="#selectedTableView" prefHeight="200.0" prefWidth="430.0">
+        <columns>
+          <TableColumn fx:id="tempStartColumn" prefWidth="127.0" text="Temp. początkowa" />
+          <TableColumn fx:id="tempEndColumn" prefWidth="116.0" text="Temp. końcowa" />
+            <TableColumn fx:id="heatEffectColumn" prefWidth="96.0" text="Efekt cieplny" />
+            <TableColumn fx:id="methodColumn" prefWidth="89.0" text="Metoda" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>
