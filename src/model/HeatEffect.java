@@ -50,14 +50,20 @@ public class HeatEffect {
 	}
 
 	//y = exp(x)
-	private double function_ours(double x){
+	/*private double function_ours(double x){
 		return Math.exp(x);
+	}*/
+
+	//y = sqrt(x)
+	private double function_ours(double x){
+		return Math.sqrt(x);
 	}
 
 	public double method_OURS(double temperature){
 		double position = temperature - tempS;
 		double tS = 0.0, tE = tempE - tempS;
-		double integral =  Math.exp(tE) - Math.exp(tS); //wartość całki oznaczonej z funkcji y = sin(x)
+		//double integral =  Math.exp(tE) - Math.exp(tS); //wartość całki oznaczonej z funkcji y = exp(x)
+		double integral =  (2.0/3.0) * (Math.pow(tE, (3.0/2.0)) - Math.pow(tS, (3.0/2.0))); //wartość całki oznaczonej z funkcji y = sqrt(x)
 		double multiplier = heatEffect / integral;
 
 		return multiplier * trapz(position, (position+1), 1000);
@@ -73,7 +79,7 @@ public class HeatEffect {
 	}
 
 //	public static void main(String[] args) {
-//		HeatEffect h1 = new HeatEffect(1530, 1540, 500, EffectType.AVERAGE);
+//		HeatEffect h1 = new HeatEffect(1500, 1510, 500, EffectType.AVERAGE);
 //
 //		double fraction;
 //		double sum = 0.0;
@@ -100,8 +106,8 @@ public class HeatEffect {
 //			System.out.println(fraction);
 //		}
 //		System.out.println("SUM = " + sum);
-
-
+//
+//
 //		System.out.println();
 //		sum = 0.0;
 //

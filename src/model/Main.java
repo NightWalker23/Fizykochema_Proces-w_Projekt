@@ -11,7 +11,8 @@ public class Main {
 //		double counter = 56;
 //		double[] enthalpy2 = model.getEnthalpy();
 //		for (double anEnthalpy : enthalpy2) {
-//			System.out.println(counter++ + "\t" + anEnthalpy);
+//			//System.out.println(counter++ + "\t" + anEnthalpy);
+//			System.out.println(anEnthalpy);
 //		}
 	}
 }

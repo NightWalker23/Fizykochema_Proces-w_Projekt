@@ -10,9 +10,10 @@ public class Model {
 	private double[] enthalpy;
 	private List<HeatEffect> heatEffectList = new ArrayList<>() {
 		{
-			add(new HeatEffect(1000, 1100, 100, AVERAGE));
-			add(new HeatEffect(1200, 1300, 100, LINEAR));
-			add(new HeatEffect(1400, 1500, 100, OURS));
+			add(new HeatEffect(800, 1200, 250, OURS));
+			add(new HeatEffect(800, 1200, 250, AVERAGE));
+//			add(new HeatEffect(800, 1200, 250, LINEAR));
+//			add(new HeatEffect(1000, 1100, 100, OURS));
 		}
 	};
 
