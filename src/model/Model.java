@@ -3,8 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.EffectType.*;
-
 public class Model {
 	private List<Element> listOfElements = new ArrayList<>();
 	private double[] enthalpy;
@@ -44,7 +42,7 @@ public class Model {
 	public void assignHeatEffectToTheElements(List<HeatEffect> heatEffectList){
 		for (HeatEffect heatEl: heatEffectList) {
 			for (Element el : listOfElements){
-				if (el.getTemperature() >= heatEl.getTempS() && el.getTemperature() <= heatEl.getTempE()){
+				if ((int)el.getTemperature() >= (int)heatEl.getTempS() && (int)el.getTemperature() <= (int)heatEl.getTempE()){
 					el.setHeatEffectFraction(el.getHeatEffectFraction() + calculateHeatEffectFraction(heatEl, el));
 				}
 			}
@@ -52,27 +50,13 @@ public class Model {
 	}
 
 	private double calculateHeatEffectFraction(HeatEffect heatEffect, Element el){
-		double heatEffectFraction = 0.0;
-
-		switch (heatEffect.getEffectType()){
-			case AVERAGE:
-				heatEffectFraction = heatEffect.method_AVERAGE(el.getTemperature());
-				break;
-			case LINEAR:
-				heatEffectFraction = heatEffect.method_LINEAR(el.getTemperature());
-				break;
-			case OURS:
-				heatEffectFraction = heatEffect.method_OURS(el.getTemperature());
-				break;
-		}
-
-		return heatEffectFraction;
+		return heatEffect.fun(el.getTemperature(), heatEffect.getEffectType());
 	}
 
 	public void calculateEnthalpy() {
 		enthalpy = new double[this.listOfElements.size() - 1];
 
-		if (enthalpy != null && enthalpy.length > 1) {
+		if (enthalpy.length > 1) {
 			double dT, dCp;
 			Element el1 = listOfElements.get(1);
 			Element el2 = listOfElements.get(0);

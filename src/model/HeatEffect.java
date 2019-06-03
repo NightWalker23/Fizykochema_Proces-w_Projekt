@@ -1,5 +1,7 @@
 package model;
 
+import static model.EffectType.*;
+
 public class HeatEffect {
 	public double tempS;
 	public double tempE;
@@ -45,8 +47,8 @@ public class HeatEffect {
 		return effectType;
 	}
 
-	//y=const
-	public double method_AVERAGE(double temperature){
+	//y = const
+	public double function_AVERAGE(double temperature){
 		double range = tempE - tempS;
 		return heatEffect / range;
 	}
@@ -56,41 +58,71 @@ public class HeatEffect {
 		return x;
 	}
 
-	public double method_LINEAR(double temperature){
-		double position = temperature - tempS;
-		double tS = 0.0, tE = tempE - tempS;
-		double integral =  0.5 * (Math.pow(tE, 2) - Math.pow(tS, 2)); //wartość całki oznaczonej z funkcji y = x
-		double multiplier = heatEffect / integral;
-
-		return multiplier * 0.5 * ( function_linear(position) + function_linear(position + 1));
-	}
-
-	//y = exp(x)
-	/*private double function_ours(double x){
-		return Math.exp(x);
-	}*/
-
 	//y = sqrt(x)
-	private double function_ours(double x){
+	private double function_SQRT(double x){
 		return Math.sqrt(x);
 	}
 
-	public double method_OURS(double temperature){
-		double position = temperature - tempS;
-		double tS = 0.0, tE = tempE - tempS;
-		//double integral =  Math.exp(tE) - Math.exp(tS); //wartość całki oznaczonej z funkcji y = exp(x)
-		double integral =  (2.0/3.0) * (Math.pow(tE, (3.0/2.0)) - Math.pow(tS, (3.0/2.0))); //wartość całki oznaczonej z funkcji y = sqrt(x)
-		double multiplier = heatEffect / integral;
-
-		return multiplier * trapz(position, (position+1), 1000);
+	//y = ln(x)
+	private double function_EXP(double x){
+		return Math.exp(x);
 	}
 
-	private double trapz(double a, double b, double parts){
+	//y = exp(-x)
+	private double function_R_EXP(double x){
+		return Math.exp(-1 * x);
+	}
+
+	//y = MAX_START
+	private double function_START(double x){
+		return x == 0.0 ? heatEffect : 0.0;
+	}
+
+	public double fun(double temperature, EffectType type){
+		int deltaT = (int)tempE - (int)tempS;
+		double stride = 2.0 / (deltaT + 1.0);
 		double sum = 0.0;
-		double h = (b-a)/parts;
-		for (double i = a; i < b; i+=h){
-			sum += 0.5 * h * (function_ours(i) + function_ours(i+h));
+		int counter = 0;
+
+		for (double k = 0; k <= 2; k += stride) {
+			switch (type){
+				case AVERAGE: sum += function_AVERAGE(k);
+					break;
+				case LINEAR: sum += function_linear(k);
+					break;
+				case SQRT: sum += function_SQRT(k);
+					break;
+				case EXP: sum += function_EXP(k);
+					break;
+				case START: sum += function_START(k);
+					break;
+				case R_EXP: sum += function_R_EXP(k);
+					break;
+			}
+			counter++;
 		}
-		return sum;
+
+		double[] values = new double[counter];
+		counter = 0;
+
+		for (double k = 0; k <= 2; k += stride) {
+			switch (type){
+				case AVERAGE: values[counter++] = function_AVERAGE(k);
+					break;
+				case LINEAR: values[counter++] = function_linear(k);
+					break;
+				case SQRT: values[counter++] = function_SQRT(k);
+					break;
+				case EXP: values[counter++] = function_EXP(k);
+					break;
+				case START: values[counter++] = function_START(k);
+					break;
+				case R_EXP: values[counter++] = function_R_EXP(k);
+					break;
+			}
+		}
+
+		int index = ((int)temperature - (int)tempS);
+		return (values[index] / sum) * heatEffect;
 	}
 }

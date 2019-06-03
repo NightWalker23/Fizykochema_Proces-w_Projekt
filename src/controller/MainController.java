@@ -3,7 +3,6 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.LineChart;
@@ -22,12 +21,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static model.EffectType.AVERAGE;
-import static model.EffectType.LINEAR;
-import static model.EffectType.OURS;
+import static model.EffectType.*;
 
 
 /**
@@ -55,7 +50,7 @@ public class MainController {
     private TextField tkTextField;
 
     @FXML
-    private ChoiceBox<String> methodChoiceBox;
+    private ChoiceBox<EffectType> methodChoiceBox;
 
     @FXML
     private TableView<HeatEffect> tableView;
@@ -83,10 +78,10 @@ public class MainController {
         tpTextField.setText("400");
         tkTextField.setText("500");
         heatEffectTextField.setText("50");
-        methodChoiceBox.setValue("LINEAR");
+        methodChoiceBox.setValue(AVERAGE);
 
-        heatEffectObservableList.add(new HeatEffect(800, 1200, 250, OURS));
-        heatEffectObservableList.add(new HeatEffect(800, 1200, 250, AVERAGE));
+        //heatEffectObservableList.add(new HeatEffect(800, 1200, 250, SQRT));
+        //heatEffectObservableList.add(new HeatEffect(800, 1200, 250, AVERAGE));
 
         tempStartColumn.setCellValueFactory(new PropertyValueFactory<>("tempS"));
         tempEndColumn.setCellValueFactory(new PropertyValueFactory<>("tempE"));
@@ -96,7 +91,7 @@ public class MainController {
         tableView.setItems(heatEffectObservableList);
 
         // Set Choicebox default values
-        ObservableList<String> items = FXCollections.observableArrayList("AVERAGE", "LINEAR", "OURS");
+        ObservableList<EffectType> items = FXCollections.observableArrayList(EffectType.values());
         methodChoiceBox.setItems(items);
     }
 
@@ -156,25 +151,7 @@ public class MainController {
             return;
         }
 
-        EffectType effectType = null;
-        if (methodChoiceBox.getValue() != null) {
-            switch (methodChoiceBox.getValue()) {
-                case "AVERAGE": {
-                    effectType = AVERAGE;
-                    break;
-                }
-                case "LINEAR": {
-                    effectType = LINEAR;
-                    break;
-                }
-                case "OURS": {
-                    effectType = OURS;
-                    break;
-                }
-            }
-        } else {
-            showAlert("Brak wartości", "Wypełnij wszystkie pola");
-        }
+        EffectType effectType = methodChoiceBox.getValue();
 
         heatEffectObservableList.add(new HeatEffect(tempS, tempE, effect, effectType));
 
@@ -231,8 +208,6 @@ public class MainController {
                     itr.remove();
                 }
             }
-
-            System.out.println(heatEffectObservableList);
         }
     }
 
@@ -243,7 +218,7 @@ public class MainController {
             tpTextField.setText(String.valueOf((int)selectedItem.getTempS()));
             tkTextField.setText(String.valueOf((int)selectedItem.getTempE()));
             heatEffectTextField.setText(String.valueOf((int)selectedItem.getHeatEffect()));
-            methodChoiceBox.setValue(String.valueOf(selectedItem.getEffectType()));
+            methodChoiceBox.setValue(selectedItem.getEffectType());
         }
     }
 
@@ -277,25 +252,7 @@ public class MainController {
             return;
         }
 
-        EffectType effectType = null;
-        if (methodChoiceBox.getValue() != null) {
-            switch (methodChoiceBox.getValue()) {
-                case "AVERAGE": {
-                    effectType = AVERAGE;
-                    break;
-                }
-                case "LINEAR": {
-                    effectType = LINEAR;
-                    break;
-                }
-                case "OURS": {
-                    effectType = OURS;
-                    break;
-                }
-            }
-        } else {
-            showAlert("Brak wartości", "Wypełnij wszystkie pola");
-        }
+        EffectType effectType = methodChoiceBox.getValue();
 
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             HeatEffect selectedItem = tableView.getSelectionModel().getSelectedItem();
@@ -322,9 +279,7 @@ public class MainController {
 
         List<Element> list = model.getListOfElements();
         double en[] = model.getEnthalpy();
-        System.out.println("\n\n");
         for (int i = 0; i < model.getListOfElements().size() - 1; i++) {
-            System.out.println(list.get(i).getSpecificHeat());
             series.getData().add(new XYChart.Data(String.valueOf(list.get(i).getTemperature()), en[i]));
         }
         lineChart.getData().addAll(series);
@@ -386,7 +341,6 @@ public class MainController {
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-        System.out.println(content);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
