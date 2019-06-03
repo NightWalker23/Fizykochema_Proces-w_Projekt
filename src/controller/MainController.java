@@ -74,10 +74,6 @@ public class MainController {
     void initialize() {
 
         heatEffectObservableList = FXCollections.observableArrayList();
-
-        tpTextField.setText("400");
-        tkTextField.setText("500");
-        heatEffectTextField.setText("50");
         methodChoiceBox.setValue(AVERAGE);
 
         tempStartColumn.setCellValueFactory(new PropertyValueFactory<>("tempS"));
@@ -97,6 +93,7 @@ public class MainController {
         String filePath = "";
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("./"));
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
         File selectedFile = fileChooser.showOpenDialog(null);
@@ -106,14 +103,13 @@ public class MainController {
         }
 
         try {
-//            model.setListOfElements(new Data().getListFromFile("./Specific_Heat.txt"));
             model.setListOfElements(new Data().getListFromFile(filePath));
+	        model.interpolateData();
             showAlert("Sukces", "Dane wczytane");
+            showEntalpyWithEffect();
         } catch (Exception e) {
             showAlert("Zły format", "Zły format pliku");
         }
-
-        model.interpolateData();
     }
 
 

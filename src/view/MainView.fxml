@@ -7,7 +7,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1222.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -55,9 +54,9 @@
                                     <Insets right="33.0" />
                                  </padding>
                               </Label>
-                              <Label text="Entalpia">
+                              <Label prefHeight="17.0" prefWidth="104.0" text="Entalpia [J/g]">
                                  <padding>
-                                    <Insets right="61.0" />
+                                    <Insets right="33.0" />
                                  </padding>
                               </Label>
                               <Label text="Metoda" />
@@ -136,14 +135,14 @@
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox fillWidth="false" prefHeight="590.0" prefWidth="731.0" HBox.hgrow="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox prefHeight="590.0" prefWidth="731.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
                      <children>
                         <LineChart fx:id="lineChart" alternativeColumnFillVisible="true" alternativeRowFillVisible="false" animated="false" createSymbols="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" prefHeight="590.0" prefWidth="749.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
                            <xAxis>
-                              <CategoryAxis animated="false" label="Temperatura [st. C]" side="BOTTOM" />
+                              <CategoryAxis label="Temperatura [st. C]" side="BOTTOM" />
                            </xAxis>
                            <yAxis>
-                              <NumberAxis animated="false" label="Entalpia [J/g]" minorTickVisible="false" prefHeight="486.0" prefWidth="46.0" side="LEFT" />
+                              <NumberAxis label="Entalpia [J/g]" minorTickVisible="false" side="LEFT" />
                            </yAxis>
                         </LineChart>
                      </children>
