@@ -80,9 +80,6 @@ public class MainController {
         heatEffectTextField.setText("50");
         methodChoiceBox.setValue(AVERAGE);
 
-        //heatEffectObservableList.add(new HeatEffect(800, 1200, 250, SQRT));
-        //heatEffectObservableList.add(new HeatEffect(800, 1200, 250, AVERAGE));
-
         tempStartColumn.setCellValueFactory(new PropertyValueFactory<>("tempS"));
         tempEndColumn.setCellValueFactory(new PropertyValueFactory<>("tempE"));
         heatEffectColumn.setCellValueFactory(new PropertyValueFactory<>("heatEffect"));
@@ -97,26 +94,24 @@ public class MainController {
 
     @FXML
     public void loadDataFromFile() {
-//        String filePath = "";
-//
-//        FileChooser fileChooser = new FileChooser();
-//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-//        fileChooser.getExtensionFilters().add(extFilter);
-//        File selectedFile = fileChooser.showOpenDialog(null);
-//
-//        if (selectedFile != null) {
-//            filePath = selectedFile.toString();
-//        }
+        String filePath = "";
+
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            filePath = selectedFile.toString();
+        }
 
         try {
-            model.setListOfElements(new Data().getListFromFile("./Specific_Heat.txt"));
-//          model.setListOfElements(new Data().getListFromFile(filePath));
+//            model.setListOfElements(new Data().getListFromFile("./Specific_Heat.txt"));
+            model.setListOfElements(new Data().getListFromFile(filePath));
             showAlert("Sukces", "Dane wczytane");
         } catch (Exception e) {
             showAlert("Zły format", "Zły format pliku");
         }
-
-        calculationPane.setDisable(false);
 
         model.interpolateData();
     }
@@ -215,9 +210,9 @@ public class MainController {
     public void selectedTableView() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             HeatEffect selectedItem = tableView.getSelectionModel().getSelectedItem();
-            tpTextField.setText(String.valueOf((int)selectedItem.getTempS()));
-            tkTextField.setText(String.valueOf((int)selectedItem.getTempE()));
-            heatEffectTextField.setText(String.valueOf((int)selectedItem.getHeatEffect()));
+            tpTextField.setText(String.valueOf((int) selectedItem.getTempS()));
+            tkTextField.setText(String.valueOf((int) selectedItem.getTempE()));
+            heatEffectTextField.setText(String.valueOf((int) selectedItem.getHeatEffect()));
             methodChoiceBox.setValue(selectedItem.getEffectType());
         }
     }
@@ -328,7 +323,7 @@ public class MainController {
                     writer.println(pm);
                 }
                 writer.println();
-                for(int i = 0 ; i < model.getEnthalpy().length; i++) {
+                for (int i = 0; i < model.getEnthalpy().length; i++) {
                     writer.println("Temp: " + model.getListOfElements().get(i).getTemperature() + ", Entalpia: " + model.getEnthalpy()[i]);
                 }
                 writer.close();
