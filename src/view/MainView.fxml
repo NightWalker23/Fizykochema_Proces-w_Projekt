@@ -7,13 +7,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1222.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1222.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="590.0" prefWidth="1222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox prefHeight="580.0" prefWidth="466.0" HBox.hgrow="NEVER">
+                  <VBox prefWidth="466.0" HBox.hgrow="NEVER">
                      <children>
                         <HBox>
                            <children>
@@ -23,10 +23,13 @@
                                  </VBox.margin>
                               </Button>
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
                            <children>
-                              <TableView fx:id="tableView" onMouseClicked="#selectedTableView" prefHeight="210.0" prefWidth="463.0">
+                              <TableView fx:id="tableView" onMouseClicked="#selectedTableView" prefWidth="463.0">
                                  <columns>
                                     <TableColumn fx:id="tempStartColumn" prefWidth="150.0" text="Temp. początkowa [st.C]" />
                                     <TableColumn fx:id="tempEndColumn" prefWidth="140.0" text="Temp. końcowa [st.C]" />
@@ -42,7 +45,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox prefHeight="18.0" prefWidth="466.0">
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="18.0" prefWidth="466.0">
                            <children>
                               <Label text="Temp. p [st.C]">
                                  <padding>
@@ -65,7 +68,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox prefHeight="27.0" prefWidth="466.0">
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="466.0">
                            <children>
                               <TextField fx:id="tpTextField" prefHeight="25.0" prefWidth="106.0" />
                               <TextField fx:id="tkTextField" prefHeight="25.0" prefWidth="106.0" />
@@ -76,7 +79,7 @@
                               <Insets bottom="15.0" />
                            </padding>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="BOTTOM_LEFT">
                            <children>
                               <Button mnemonicParsing="false" onAction="#addItem" prefHeight="33.0" prefWidth="99.0" text="Dodaj">
                                  <padding>
@@ -94,7 +97,7 @@
                               <Button mnemonicParsing="false" onAction="#deleteItem" prefHeight="33.0" prefWidth="102.0" text="Usuń" />
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="BOTTOM_LEFT">
                            <children>
                               <Button mnemonicParsing="false" onAction="#showEntalpyWithEffect" prefHeight="33.0" prefWidth="323.0" text="Przelicz i pokaż wykres">
                                  <HBox.margin>
@@ -103,7 +106,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="BOTTOM_LEFT">
                            <children>
                               <Button mnemonicParsing="false" onAction="#saveEntalpyFile" prefHeight="33.0" prefWidth="323.0" text="Zapisz wynik do pliku">
                                  <HBox.margin>
@@ -112,7 +115,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="BOTTOM_LEFT">
                            <children>
                               <Button mnemonicParsing="false" onAction="#saveEntalpyLineChart" prefHeight="33.0" prefWidth="323.0" text="Zapisz wykres">
                                  <HBox.margin>
@@ -121,7 +124,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="BOTTOM_LEFT">
                            <children>
                               <Button mnemonicParsing="false" onAction="#cleanLineChart" prefHeight="33.0" prefWidth="323.0" text="Wyczysc wykres">
                                  <HBox.margin>
@@ -132,7 +135,7 @@
                         </HBox>
                      </children>
                      <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </HBox.margin>
                   </VBox>
                   <VBox prefHeight="590.0" prefWidth="731.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
